@@ -61,4 +61,21 @@ describe("create farmer service", () => {
       vegetationArea: data.vegetationArea
     })
   })
+
+  test("should throws if database throws", async () => {
+    const data = {
+      name: "invalid.user",
+      farmName: "valid.farm",
+      arableArea: 1,
+      foodsPlanted: [{ name: "Algodao", quantity: 1}],
+      city: "valid.city",
+      identifier: "valid.identifier",
+      state: "valid.state",
+    }
+    const { sut, repository } = await makeSut()
+    vi.spyOn(repository, "create").mockRejectedValueOnce({})
+    // @ts-ignore
+    const response = sut.create(data)
+    expect(response).rejects.toThrow()
+  })
 })
