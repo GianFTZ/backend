@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { describe, expect, test, vi } from "vitest";
 import { ICreateFarmerUseCase } from "../../../../farmer/domain/usecases/create";
 import { Farmer } from "../../../../farmer/domain";
 
@@ -11,7 +11,7 @@ class CreateFarmerRepositoryStub {
 
 class CreateFarmerServiceStub implements ICreateFarmerUseCase {
   constructor(private readonly createFarmerRepository: CreateFarmerRepositoryStub){}
-  public async create(farmer: Farmer): Promise<Pick<Farmer, "name">> {
+  public async create(farmer: Farmer | any): Promise<Pick<Farmer, "name">> {
     const data = await this.createFarmerRepository.create(farmer)
     if(!data) throw new Error(`Failed to create`)
     return {
@@ -44,5 +44,21 @@ describe("create farmer use case", () => {
     const { sut } = await makeSut()
     const response = await sut.create(data)
     expect(response).toEqual({name: data.name})
+  })
+
+  test("should throws if database throws", async () => {
+    const data = {
+      name: "invalid.user",
+      farmName: "valid.farm",
+      arableArea: 1,
+      foodsPlanted: [{ name: "Algodao", quantity: 1}],
+      city: "valid.city",
+      identifier: "valid.identifier",
+      state: "valid.state",
+    }
+    const { sut, repository } = await makeSut()
+    vi.spyOn(repository, "create").mockRejectedValueOnce({})
+    const response = sut.create(data)
+    expect(response).rejects.toThrow()
   })
 })
