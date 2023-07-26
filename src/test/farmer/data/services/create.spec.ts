@@ -31,7 +31,7 @@ describe("create farmer service", () => {
       state: "valid.state",
       vegetationArea: 1
     }
-    const { sut, repository } = await makeSut()
+    const { sut } = await makeSut()
     const response = await sut.create(data)
     expect(response).toEqual({ name: data.name })
   })
