@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node-18 /usr/bin/yarn add @types/vitest
+  /usr/bin/node-18 /usr/bin/yarn add -D @types/prisma
 
 PATH: 
   /home/gftz/.nvm/versions/node/v20.3.0/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/var/lib/snapd/snap/bin:/home/gftz/.dotnet/tools:/home/gftz/Android/Sdk/emulator:/home/gftz/Android/Sdk/platform-tools:/home/gftz/Android/Sdk/emulator:/home/gftz/Android/Sdk/platform-tools
@@ -14,7 +14,7 @@ Platform:
   linux x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fvitest: Not found
+  Error: https://registry.yarnpkg.com/@types%2fprisma: Not found
       at params.callback [as _callback] (/usr/lib/node_modules_18/yarn/lib/util/request-manager.js:451:18)
       at self.callback (/usr/lib/node_modules_18/yarn/node_modules/request/request.js:185:22)
       at Request.emit (node:events:513:28)
@@ -40,7 +40,11 @@ npm manifest:
       "vitest": "^0.33.0"
     },
     "dependencies": {
+      "@prisma/client": "^5.0.0",
       "vite-tsconfig-paths": "^4.2.0"
+    },
+    "scripts": {
+      "test": "vitest"
     }
   }
 
@@ -269,6 +273,18 @@ Lockfile:
       open "^9.1.0"
       picocolors "^1.0.0"
       tslib "^2.6.0"
+  
+  "@prisma/client@^5.0.0":
+    version "5.0.0"
+    resolved "https://registry.yarnpkg.com/@prisma/client/-/client-5.0.0.tgz#9f0cd4164f4ffddb28bb1811c27eb7fa1e01a087"
+    integrity sha512-XlO5ELNAQ7rV4cXIDJUNBEgdLwX3pjtt9Q/RHqDpGf43szpNJx2hJnggfFs7TKNx0cOFsl6KJCSfqr5duEU/bQ==
+    dependencies:
+      "@prisma/engines-version" "4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584"
+  
+  "@prisma/engines-version@4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584":
+    version "4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584"
+    resolved "https://registry.yarnpkg.com/@prisma/engines-version/-/engines-version-4.17.0-26.6b0aef69b7cdfc787f822ecd7cdc76d5f1991584.tgz#b36eda5620872d3fac810c302a7e46cf41daa033"
+    integrity sha512-HHiUF6NixsldsP3JROq07TYBLEjXFKr6PdH8H4gK/XAoTmIplOJBCgrIUMrsRAnEuGyRoRLXKXWUb943+PFoKQ==
   
   "@rocketseat/eslint-config@^2.1.0":
     version "2.1.0"

@@ -6,14 +6,14 @@ export class CreateFarmerService implements ICreateFarmerUseCase {
   constructor(private readonly createFarmerRepository: ICreateFarmerRepository){}
   public async create(farmer: FarmerModel): Promise<Pick<FarmerModel, "name">> {
     const data = await this.createFarmerRepository.create({
-      arableArea: farmer.arableArea,
-      name: farmer.name,
+      arableArea: Number(farmer.arableArea.toFixed(2)),
+      name: farmer.name.toLowerCase(),
       identifier: farmer.identifier,
-      city: farmer.city,
-      farmName: farmer.farmName,
+      city: farmer.city.toLowerCase(),
+      farmName: farmer.farmName.toLowerCase(),
       foodsPlanted: farmer.foodsPlanted.map(food => { return { name: food.name.toLowerCase(), quantity: food.quantity } }),
-      state: farmer.state,
-      vegetationArea: farmer.vegetationArea
+      state: farmer.state.toLowerCase(),
+      vegetationArea: Number(farmer.vegetationArea.toFixed(2))
     })
     if(!data) throw new Error(`Failed to create`)
     return {
