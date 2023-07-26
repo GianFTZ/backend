@@ -12,12 +12,13 @@ datasource db {
 
 model Farmer {
   id             String         @id @default(uuid())
-  name           String
+  name           String         @unique
   farmName       String
   city           String
   state          String
   arableArea     Int
   vegetationArea Int
+  identifier     String
   foodsPlanted   FoodsPlanted[]
 
   @@map("public.farmer")
@@ -25,8 +26,10 @@ model Farmer {
 
 model FoodsPlanted {
   id       String @id @default(uuid())
+  name     String
+  quantity Int
   farmerId String
-  Farmer Farmer @relation(fields: [farmerId], references: [id])
+  Farmer   Farmer @relation(fields: [farmerId], references: [id])
 }
 
 // identifier: string
