@@ -18,7 +18,7 @@ model Farmer {
   state          String
   arableArea     Int
   vegetationArea Int
-  identifier     String
+  identifier     String         @unique
   foodsPlanted   FoodsPlanted[]
 
   @@map("public.farmer")
@@ -32,11 +32,3 @@ model FoodsPlanted {
   Farmer   Farmer @relation(fields: [farmerId], references: [id])
 }
 
-// identifier: string
-// name: string
-// farmName: string
-// city: string
-// state: string
-// arableArea: number
-// vegetationArea: number
-// foodsPlanted: Food[]
